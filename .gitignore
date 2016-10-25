@@ -6,3 +6,4 @@ flask
 *.csv
 PodCast/
 __pycache__/
+.venv
