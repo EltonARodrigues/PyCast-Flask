@@ -1,15 +1,17 @@
-{%- extends "bootstrap/base.html" %}
-{% import "bootstrap/utils.html" as utils %}
-{% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='main.css')}}">
-{% endblock %}
-{% block title %} PyCast WEB test {% endblock %}
-{% block content %}
- <div class="container">
-    <div class="jumbotron">
-      {% block feed %}
-      {% endblock %}
-    </div>
- </div>
-{%- endblock content%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{url_for('.static', filename='main.css')}}">
+        <title>PyCast WEB</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                {% block content %}
+                    {% block feed %}
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
