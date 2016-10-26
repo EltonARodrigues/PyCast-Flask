@@ -17,6 +17,7 @@ def register():
     add = Addfeed(request.form)
     cast = SelectPodcast(request.form)
     ep_get = SelectEP(request.form)
+    ep_tf = SelectPodcast(request.form) # teste label bootstrap
 
     choices_pod = list()
     ep_choices = list()
@@ -41,7 +42,9 @@ def register():
             ep_names = XML.list_pod(XML.feed_in())
 
         for ep in range(0, len(ep_names)):
-            ep_choices.append((ep_names[ep],ep_names[ep]))
+            ep_choices.append((ep_names[ep],ep_names[ep]))          
+
+        
         ep_get.ep_cast.choices = ep_choices
 
 
@@ -52,14 +55,14 @@ def register():
         ep_selected =  ep_get.ep_cast.data  
         print(ep_selected)
         XML.search_pod(XML.feed_in(),ep_selected,pod_selected)
+        message = ('Donwload Complete - '+  ep_selected)
 
-
-        return render_template('feed.html',cast = cast, ep_get = ep_get, message = ('Donwload Complete - '+  ep_selected), add = add)
+        return render_template('feed.html',cast = cast, ep_get = ep_get, message = message, add = add)
 
     if 'addfeed' in request.form:
         get_feed = add.feed.data
         if CSV.verify(get_feed) == True:
-            error_mensagem = 'Já Existente!'
+            error_mensagem = 'Feed já existente!'
             return render_template('feed.html',cast = cast, error = error_mensagem, add = add)
         else:
             XMLdata(get_feed).add_feed()
@@ -71,4 +74,8 @@ def register():
             #######
             return render_template('feed.html',cast = cast, add = add)
 
-    return render_template('feed.html', cast = cast, add = add)
+    if not cast.podcast.choices:
+        return render_template('feed.html',add = add, teste = "testando caralho")
+    else:
+        return render_template('feed.html', cast = cast, add = add, teste = "testando caralho")
+    

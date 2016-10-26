@@ -2,9 +2,18 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{url_for('.static', filename='main.css')}}">
+        <link rel="stylesheet" type="text/javascript" href= "{{url_for('.static', filename='bootstrap.css')}}">
         <title>PyCast WEB</title>
     </head>
     <body>
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">PyCast</a>  
+      </a>
+    </div>
+  </div>
+</nav>
         <div class="container">
             <div class="jumbotron">
                 {% block content %}

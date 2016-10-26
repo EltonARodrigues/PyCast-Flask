@@ -1,33 +1,40 @@
 {% extends "base.html" %}
 {% block feed %}
-  {% if message %}
-    <p> {{ message}}</p>
+
+  {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error}}</div>
   {% endif %}
+  {% if message %}
+    <div class="alert alert-success" role="alert">{{ message}}</div>
+  {% endif%}
+
   <form action="/" method="post" accept-charset="utf-8">
     <legend>Insira o RSS:</legend>
     {{ add.feed}}
-    {% if error %}
-      <p> {{ error}}</p>
-    {% endif%}
-    <p><input value = "Adicionar" type="submit" name="addfeed">
+    <br><input value = "Adicionar" type="submit" name="addfeed">
   </form>
-  <form method=post action="/">
-    <dl>
-      {{ cast.podcast.label }}
-      {{ cast.podcast }}
-    </dl>
-    <p><input value = "Selecionar" type="submit" name="podselect"></p>
-  </form>
+<br>
   <div class="select-style">
-    <form method=post action="/">
-      {% if ep_get %}
-        <dl class= 'css_selectfield'>
-          {{ ep_get.ep_cast.label }}
-          {{ ep_get.ep_cast}}
-        </dl>
-        
-        <p><input value = "Selecionar" type="submit" name="epselect"></p>
-      </div>
-    </form>
-  {% endif %}
+  <form method=post action="/">
+    <dl class= 'css_selectfield'>
+      {% if cast %}
+        {{ cast.podcast.label }}
+        {{ cast.podcast }}
+    </dl>
+    <input value = "Selecionar" type="submit" name="podselect">
+    {% endif %}
+  </form>
+ 
+  <form method=post action="/">
+    {% if ep_get %}
+      <dl class= 'css_selectfield'>
+        {{ ep_get.ep_cast.label }}
+        {{ ep_get.ep_cast}}
+      </dl>
+      <input value = "Selecionar" type="submit" name="epselect">
+    {% endif %}
+  </form>
+  </div>
 {% endblock %}
+
+
