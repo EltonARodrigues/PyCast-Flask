@@ -50,7 +50,6 @@ class CSVfeed:
                 if(row[1] == name_pod):
                     return row[2]
 
-    #####Não utilizado#####
     def remove(self,id_remove):
         teste = list()
         with open('Podcasts.csv', 'r') as csvfile:
@@ -63,5 +62,14 @@ class CSVfeed:
             csv_writer = csv.writer(file_handler)
             for row in teste:
                 csv_writer.writerow(row)
+
+    def get_id(self,nome):
+        with open('Podcasts.csv', 'r') as csvfile:
+            users_reader = csv.reader(csvfile)
+            for row in users_reader:
+                if row[1] == nome:
+                    return row[0]
+
+        return None
 
 

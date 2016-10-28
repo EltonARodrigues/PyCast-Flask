@@ -1,38 +1,27 @@
 from flask import render_template
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
-from flask import flash, redirect, url_for, session, render_template, request
-from .form import SelectPodcast, SelectEP, Addfeed
+from flask import flash, redirect, url_for, session, render_template, request   
 from .XMLCSV.XMLdata import XMLdata
 from .XMLCSV.csv_import import CSVfeed
-
+ 
 from app import app
 
-url_feed = ''
-pod_selected = None
 
 @app.route('/', methods=['GET', 'POST'])
 def register():
-    global pod_selected
-    global url_feed
-    add = Addfeed(request.form)
-    cast = SelectPodcast(request.form)
-    ep_get = SelectEP(request.form)
-    ep_tf = SelectPodcast(request.form) # teste label bootstrap
+    pod_selected = None
 
-    choices_pod = list()
     ep_choices = list()
+    ep_tf = list()
 
     CSV = CSVfeed()
     CSV.file_csv()
     view = CSV.select()
 
     for i in range(0, len(view)):
-        choices_pod.append((view[i],view[i]))
-    cast.podcast.choices = choices_pod
+        ep_tf.append(view[i])
 
     if 'podselect' in request.form:
-        pod_selected =  cast.podcast.data
-
+        pod_selected = request.form['pod_name']
         if pod_selected != None: 
             CSV.file_csv()
             
@@ -40,42 +29,54 @@ def register():
 
             XML = XMLdata(url_feed)
             ep_names = XML.list_pod(XML.feed_in())
-
+ 
         for ep in range(0, len(ep_names)):
-            ep_choices.append((ep_names[ep],ep_names[ep]))          
-
-        
-        ep_get.ep_cast.choices = ep_choices
-
-
-        return render_template('feed.html',cast = cast, ep_get = ep_get, add = add)
+            ep_choices.append(ep_names[ep])
+              
+        return render_template('feed.html', ep_tf = ep_tf, ep_get = ep_choices)
     
     if 'epselect' in request.form:
-        XML = XMLdata(url_feed)
-        ep_selected =  ep_get.ep_cast.data  
-        print(ep_selected)
+        XML = XMLdata(url_feed) 
+        ep_selected = request.form['ep_name']
         XML.search_pod(XML.feed_in(),ep_selected,pod_selected)
         message = ('Donwload Complete - '+  ep_selected)
 
-        return render_template('feed.html',cast = cast, ep_get = ep_get, message = message, add = add)
+        return render_template('feed.html', ep_tf = ep_tf, ep_get = ep_choices, message = message)
 
     if 'addfeed' in request.form:
-        get_feed = add.feed.data
-        if CSV.verify(get_feed) == True:
-            error_mensagem = 'Feed já existente!'
-            return render_template('feed.html',cast = cast, error = error_mensagem, add = add)
-        else:
-            XMLdata(get_feed).add_feed()
-            #teste
-            view = CSV.select()
-            for i in range(0, len(view)):
-                choices_pod.append((view[i],view[i]))
-                cast.podcast.choices = choices_pod
-            #######
-            return render_template('feed.html',cast = cast, add = add)
+        try:
+            get_feed = request.form['addf']
 
-    if not cast.podcast.choices:
-        return render_template('feed.html',add = add, teste = "testando caralho")
-    else:
-        return render_template('feed.html', cast = cast, add = add, teste = "testando caralho")
+            if CSV.verify(get_feed) == True:
+                error_mensagem = 'Feed já existente!'
+                return render_template('feed.html', ep_tf = ep_tf, error = error_mensagem)
+            else:
+                XMLdata(get_feed).add_feed()
+
+                view = CSV.select()
+                for i in range(0, len(view)):
+                    ep_tf.append(view[i])
+                
+                return render_template('feed.html', ep_tf = ep_tf)
+        
+        except AttributeError:
+            
+            if ep_choices == None:
+                return render_template('feed.html', error = 'Link invalido ou em branco ')
+
+            else:
+                return render_template('feed.html', ep_tf = ep_tf, error = 'Link invalido ou em branco')
+
+    if 'delfeed' in request.form:
+        ep_selected = request.form['pod_name']
+        CSV.remove(CSV.get_id(ep_selected))
+        print("tete:{}".format(ep_choices))
+        
+        if ep_choices == None:
+            return render_template('feed.html')
+
+        else:
+            return render_template('feed.html', ep_tf = ep_tf, ep_get = ep_choices)
+
+    return render_template('feed.html', ep_tf = ep_tf)
     
