@@ -5,10 +5,12 @@ from .XMLCSV.csv_import import CSVfeed
  
 from app import app
 
-
+url_feed = None
+pod_selected = None
 @app.route('/', methods=['GET', 'POST'])
 def register():
-    pod_selected = None
+    global url_feed
+    global pod_selected
 
     ep_choices = list()
     ep_tf = list()
@@ -38,6 +40,8 @@ def register():
     if 'epselect' in request.form:
         XML = XMLdata(url_feed) 
         ep_selected = request.form['ep_name']
+        print(ep_selected)
+        print(pod_selected)
         XML.search_pod(XML.feed_in(),ep_selected,pod_selected)
         message = ('Donwload Complete - '+  ep_selected)
 
