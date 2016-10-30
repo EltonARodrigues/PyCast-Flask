@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{{url_for('.static', filename='main.css')}}">
+        <link rel="stylesheet" href="{{url_for('.static', filename='new_main.css')}}">
         <title>PyCast WEB</title>
     </head>
     <body>
         <div class="container">
-            <div class="jumbotron">
                 {% block content %}
                     {% block feed %}
                     {% endblock %}
                 {% endblock %}
-            </div>
         </div>
     </body>
 </html>

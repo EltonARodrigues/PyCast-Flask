@@ -1,0 +1,26 @@
+@import url(reset.css);
+body {
+  background-color: #FFF; }
+
+.container {
+  padding: 3em 15%;
+  background-color: #eee;
+  overflow: hidden; }
+
+.btn,
+.btn:link,
+.btn:visited {
+  border-radius: .25em;
+  border-style: solid;
+  border-width: 1px;
+  color: #111;
+  display: inline-block;
+  font-family: avenir, helvetica, roboto, arial, sans-serif;
+  letter-spacing: .15em;
+  margin-bottom: .5em;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .4s, background-color .4s, border .4s; }
+
+/*# sourceMappingURL=new_main.css.map */
