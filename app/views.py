@@ -32,9 +32,9 @@ def register():
     if 'podselect' in request.form:
         pod_selected =  cast.podcast.data
 
-        if pod_selected != None: 
+        if pod_selected != None:
             CSV.file_csv()
-            
+
             url_feed = CSV.get_url(pod_selected)
 
             XML = XMLdata(url_feed)
@@ -46,10 +46,10 @@ def register():
 
 
         return render_template('feed.html',cast = cast, ep_get = ep_get, add = add)
-    
+
     if 'epselect' in request.form:
         XML = XMLdata(url_feed)
-        ep_selected =  ep_get.ep_cast.data  
+        ep_selected =  ep_get.ep_cast.data
         print(ep_selected)
         XML.search_pod(XML.feed_in(),ep_selected,pod_selected)
 

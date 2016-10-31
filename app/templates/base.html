@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="{{url_for('.static', filename='new_main.css')}}">
-        <link href="https://fonts.googleapis.com/css?family=Bungee+Hairline" rel="stylesheet"> 
-        <title>PyCast WEB</title>
-    </head>
-    <body>
-        <div class="container home">
-            <h1>Baixe seus podcasts</h1>
-            <h2>PyFeed versão Flask</h2>
-        </div>
 
-        <div class="container">
-                {% block content %}
-                    {% block feed %}
-                    {% endblock %}
-                {% endblock %}
-        </div>
-    </body>
+<head>
+    <link rel="stylesheet" href="{{url_for('.static', filename='new_main.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+    <title>PyCast WEB</title>
+</head>
+
+<body>
+    <div class="container home">
+        <h1>Baixe seus podcasts</h1>
+        <h2>PyFeed versão Flask</h2>
+    </div>
+
+    <div class="container">
+        {% block content %} {% block feed %} {% endblock %} {% endblock %}
+    </div>
+</body>
+
 </html>
