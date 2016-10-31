@@ -1,24 +1,84 @@
 @import "reset.css";
-$color-fundo : #FFF;
-$color-container : #eee;
+$white : #FFFFFF;
+$black: #111111;
+$gray: #AAAAAA;
+
+@mixin borda($tamanho:2px, $cor: $gray) {
+    border-top: $tamanho solid $cor;
+}
+
+$color-panel: $black;
+$letra-head: $white;
+$color-fundo-head: $white;
+$color-fundo-cotainer: $white;
 
 body{
-    background-color: $color-fundo;
+    font-family: 'Bungee Hairline', cursive;
 }
 
 .container{
     padding: 3em 15%;
-    background-color: $color-container;
+    background-color: $color-fundo-cotainer;
     overflow: hidden;
 }
 
-.btn,
-.btn:link,
-.btn:visited {
+.main{
+    color: $black;
+}
+
+.home{
+    color: $black;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px;
+    border-bottom-style: dashed;
+    position: relative;
+    background-image: linear-gradient(to bottom, rgba(246,46,36,1) 0%, rgba(255,54,121,1) 100%);
+    animation: init 3s;
+}
+@keyframes init {
+    from{
+        opacity: 0;
+    }
+}
+
+h1{
+    font-size: 3em;
+    text-transform: uppercase;
+}
+h2{
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+input{
+    width: 100%;
+    font-size: 1.5em;
+    padding: 0.5em;
+    margin: 0.3em 0 ;
+    border-radius: 0.3em;
+}
+
+.panel{
+    padding: 2em 10%;
+    background-color: $white;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    @include borda();
+    margin-bottom: 1em;
+    position: relative;
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+
+.btn{
   border-radius: .25em;
   border-style: solid;
   border-width: 1px;
   color: #111;
+  border-color: $black;
   display: inline-block;
   font-family: avenir, helvetica, roboto, arial, sans-serif;
   letter-spacing: .15em;
@@ -26,5 +86,10 @@ body{
   padding: 1em 1.5em;
   text-decoration: none;
   text-transform: uppercase;
-  transition: color .4s, background-color .4s, border .4s;
+  transition: 0.5s;
+  background-color: $white;
+  &:hover{
+      background-color: $black;
+      color: $white;
+  }
 }

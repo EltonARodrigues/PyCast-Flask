@@ -1,19 +1,61 @@
 @import url(reset.css);
 body {
-  background-color: #FFF; }
+  font-family: 'Bungee Hairline', cursive; }
 
 .container {
   padding: 3em 15%;
-  background-color: #eee;
+  background-color: #FFFFFF;
   overflow: hidden; }
 
-.btn,
-.btn:link,
-.btn:visited {
+.main {
+  color: #111111; }
+
+.home {
+  color: #111111;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px;
+  border-bottom-style: dashed;
+  position: relative;
+  background-image: linear-gradient(to bottom, #f62e24 0%, #ff3679 100%);
+  animation: init 3s; }
+
+@keyframes init {
+  from {
+    opacity: 0; } }
+h1 {
+  font-size: 3em;
+  text-transform: uppercase; }
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bolder;
+  text-decoration: underline; }
+
+input {
+  width: 100%;
+  font-size: 1.5em;
+  padding: 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.3em; }
+
+.panel {
+  padding: 2em 10%;
+  background-color: #FFFFFF;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  border-top: 2px solid #AAAAAA;
+  margin-bottom: 1em;
+  position: relative; }
+  .panel:last-child {
+    margin-bottom: 0; }
+
+.btn {
   border-radius: .25em;
   border-style: solid;
   border-width: 1px;
   color: #111;
+  border-color: #111111;
   display: inline-block;
   font-family: avenir, helvetica, roboto, arial, sans-serif;
   letter-spacing: .15em;
@@ -21,6 +63,10 @@ body {
   padding: 1em 1.5em;
   text-decoration: none;
   text-transform: uppercase;
-  transition: color .4s, background-color .4s, border .4s; }
+  transition: 0.5s;
+  background-color: #FFFFFF; }
+  .btn:hover {
+    background-color: #111111;
+    color: #FFFFFF; }
 
 /*# sourceMappingURL=new_main.css.map */

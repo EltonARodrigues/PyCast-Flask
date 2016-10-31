@@ -3,36 +3,34 @@
   {% if message %}
     {{ message}}
   {% endif %}
-  <div class="container">
+  <div class="panel">
   <form action="/" method="post" accept-charset="utf-8">
-    <legend>Insira o RSS:</legend>
     {{ add.feed}}
     {% if error %}
       <p>{{ error}}</p>
     {% endif%}
-    <button class='btn' type="submit" name="button">Adicionar</button>
+    <button class='btn' type="submit" name="addfeed">Adicionar</button>
   </form>
 </div>
 {% if cast.podcast and cast.podcast.label %}
-<div class="container">
-
+<div class="panel">
   <form method=post action="/">
     <dl>
       {{ cast.podcast.label }}
       {{ cast.podcast }}
     </dl>
-    <button class='btn' type="submit" name="button">Selecionar</button>
+    <button class='btn' type="submit" name="podselect">Selecionar</button>
   </form>
 </div>
 {% endif %}
 {% if ep_get %}
-<div class="container">
+<div class="panel">
     <form method=post action="/">
         <dl class= 'css_selectfield'>
           {{ ep_get.ep_cast.label }}
           {{ ep_get.ep_cast}}
         </dl>
-        <input value = "Selecionar" type="submit" name="epselect">
+        <button class='btn' type="submit" name="epselect">Baixar!</button>
     </form>
   {% endif %}
 </div>
