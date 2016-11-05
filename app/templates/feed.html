@@ -1,45 +1,36 @@
-{% extends "base.html" %}
-{% block feed %}
-    {% if error %}
-        <div class="alert alert-danger" role="alert">{{ error}}</div>
-    {% endif %}
-  
-    {% if message %}
-        <div class="alert alert-success" role="alert">{{ message}}</div>
-    {% endif%}
- 
+{% extends "base.html" %} {% block feed %} {% if message %} {{ message}}{% endif %}
+<div class="panel">
     <form action="/" method="post" accept-charset="utf-8">
         <legend>Insira o RSS:</legend>
         <input type="text" class="form-control" name="addf">
-        <button type="submit" class="btn btn-primary" name="addfeed">Adicionar</button> 
+        <button type="submit" class="btn" name="addfeed">Adicionar</button> 
     </form>
-    <br>
-    <div class="select-style">
+</div>
+{% if ep_tf %}
+    <div class="panel">
         <form method=post action="/">
-            {% if ep_tf %}
-                <select name="pod_name" class="form-control">
-                    {% for pod in ep_tf%}
-                        <option value = "{{ pod }}" > {{ pod }} </option>
-                    {% endfor%}
-                </select>
-                <button type="submit" class="btn btn-primary" name="podselect">Selecionar</button> 
+            <select name="pod_name" class="form-control">
+                {% for pod in ep_tf%}
+                    <option value = "{{ pod }}" > {{ pod }} </option>
+                {% endfor%}
+            </select>
+            <button type="submit" class="btn btn-primary" name="podselect">Selecionar</button> 
 
-                <button type="submit" class="btn btn-danger" name="delfeed">Remover</button>
-            {% endif %}
-        </form>
- 
-    <form method=post action="/">
-        {% if ep_get %}
+            <button type="submit" class="btn btn-danger" name="delfeed">Remover</button>        
+    </form>
+</div>
+
+{% endif %} 
+{% if ep_get %}
+    <div class="panel">
+        <form method=post action="/">
             <select name="ep_name" class="form-control">
                 {% for ep in ep_get%}
                     <option value = "{{ ep }}" > {{ ep }} </option>
                 {% endfor%}
             </select>
-
             <button type="submit" name="epselect" class="btn btn-success">Download</button>
-        {% endif %}
-    </form>
+        </form>
     </div>
+    {% endif %}
 {% endblock %}
-
-
