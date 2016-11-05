@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block feed %}
+  {% if message %}
+    <p> {{ message}}</p>
+  {% endif %}
+  <form action="/" method="post" accept-charset="utf-8">
+    <legend>Insira o RSS:</legend>
+    {{ add.feed}}
+    {% if error %}
+      <p> {{ error}}</p>
+    {% endif%}
+    <p><input value = "Adicionar" type="submit" name="addfeed">
+  </form>
+  <form method=post action="/">
+    <dl>
+      {{ cast.podcast.label }}
+      {{ cast.podcast }}
+    </dl>
+    <p><input value = "Selecionar" type="submit" name="podselect"></p>
+  </form>
+  <div class="select-style">
+    <form method=post action="/">
+      {% if ep_get %}
+        <dl class= 'css_selectfield'>
+          {{ ep_get.ep_cast.label }}
+          {{ ep_get.ep_cast}}
+        </dl>
+
+        <p><input value = "Selecionar" type="submit" name="epselect"></p>
+      </div>
+    </form>
+  {% endif %}
+{% endblock %}
