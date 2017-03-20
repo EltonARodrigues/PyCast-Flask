@@ -13,7 +13,7 @@ class XMLdata:
         self.link_p = self.d.feed.title_detail.base
         self.title_p = self.d.feed.title_detail.value
         self.url_site = self.d.feed.link
-    
+
     def add_feed(self):
 
         CSV = CSVfeed()
@@ -25,16 +25,8 @@ class XMLdata:
 
 
     def clear_link(self, mp3):
-        mp3 = mp3.split('.mp3')[0]
-        mp3 = mp3.split('http://')[-1]
-
-        if str.find(mp3, 'http://') != 0:
-            mp3 = 'http://' + mp3
-
-        if str.find(mp3, '.mp3') == -1:
-            mp3 = mp3 + '.mp3'
-
-        return mp3
+        re_link = re.search('http.+mp3',mp3)
+        return re_link.group(0)
 
     def list_pod(self,feed):
         d, n_epsodes = feed
@@ -43,7 +35,7 @@ class XMLdata:
         for i in range(n_epsodes):
             titulo = (d['entries'][i]['title'])
             list_p.append(titulo)
-   
+
         return list_p
 
     def search_pod(self, feed, search, name_pod):
@@ -73,7 +65,8 @@ class XMLdata:
         if str.find(mp3, '.mp3') == -1:
             mp3 = mp3 + '.mp3'
 
-        html = urllib.request.urlopen(mp3).read()
+        return mp3
+        '''html = urllib.request.urlopen(mp3).read()
         name = name + '.mp3'
 
         #remove / filename
@@ -87,4 +80,4 @@ class XMLdata:
 
         arq = open(d + name, 'wb')
         arq.write(html)
-        arq.close()
+        arq.close()'''

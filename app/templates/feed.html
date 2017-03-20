@@ -3,7 +3,7 @@
     <form action="/" method="post" accept-charset="utf-8">
         <legend>Insira o RSS:</legend>
         <input type="text" class="form-control" name="addf">
-        <button type="submit" class="btn" name="addfeed">Adicionar</button> 
+        <button type="submit" class="btn" name="addfeed">Adicionar</button>
     </form>
 </div>
 {% if ep_tf %}
@@ -14,13 +14,13 @@
                     <option value = "{{ pod }}" > {{ pod }} </option>
                 {% endfor%}
             </select>
-            <button type="submit" class="btn btn-primary" name="podselect">Selecionar</button> 
+            <button type="submit" class="btn btn-primary" name="podselect">Selecionar</button>
 
-            <button type="submit" class="btn btn-danger" name="delfeed">Remover</button>        
+            <button type="submit" class="btn btn-danger" name="delfeed">Remover</button>
     </form>
 </div>
 
-{% endif %} 
+{% endif %}
 {% if ep_get %}
     <div class="panel">
         <form method=post action="/">
