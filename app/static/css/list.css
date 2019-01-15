@@ -1,0 +1,165 @@
+header{
+    padding: 10px;
+    font-size: 2em;
+    color: white;
+    background-color: #5b5f97;
+    width: 100%;
+    height: 200px;
+}
+
+.link_home{
+  position: absolute;
+	background-color: #fffffb;
+	padding: 10px;
+	left: 0;
+	width: 100px;
+	text-decoration: none;
+
+
+}
+body{
+ padding: 0;
+  margin: 0;
+  margin: 0px auto;
+ background-color: #ffffff;
+}
+
+.div-eps{
+  display: table;
+  margin: 0 auto;
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 50px;
+}
+
+ul{
+	height: 500px;
+	width: 800px;
+	overflow: auto;
+  padding: 10px;
+}
+
+.pod-names{
+	width:50px;
+}
+
+ul{
+
+	justify-content: center;}
+ul li{
+  list-style: none;
+  margin: 38px 0;
+}
+
+li{
+	border-top: 1px solid;
+}
+
+li:hover{
+	background-color: red;
+}
+
+a{
+ float: right;
+}
+
+
+.buttonDownload {
+	display: inline-block;
+	position: relative;
+	padding: 10px 25px;
+
+	background-color: #4CC713;
+	color: white;
+
+	font-family: sans-serif;
+	text-decoration: none;
+	font-size: 0.9em;
+	text-align: center;
+	text-indent: 15px;
+}
+
+.buttonDownload:hover {
+	background-color: #333;
+	color: white;
+}
+
+.buttonDownload:before, .buttonDownload:after {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 15px;
+	top: 52%;
+}
+
+/* Download box shape  */
+.buttonDownload:before {
+	width: 10px;
+	height: 2px;
+	border-style: solid;
+	border-width: 0 2px 2px;
+}
+
+/* Download arrow shape */
+.buttonDownload:after {
+	width: 0;
+	height: 0;
+	margin-left: 3px;
+	margin-top: -7px;
+
+	border-style: solid;
+	border-width: 4px 4px 0 4px;
+	border-color: transparent;
+	border-top-color: inherit;
+
+	animation: downloadArrow 2s linear infinite;
+	animation-play-state: paused;
+}
+
+.buttonDownload:hover:before {
+	border-color: #4CC713;
+}
+
+.buttonDownload:hover:after {
+	border-top-color: #4CC713;
+	animation-play-state: running;
+}
+
+/* keyframes for the download icon anim */
+@keyframes downloadArrow {
+	/* 0% and 0.001% keyframes used as a hackish way of having the button frozen on a nice looking frame by default */
+	0% {
+		margin-top: -7px;
+		opacity: 1;
+	}
+
+	0.001% {
+		margin-top: -15px;
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		margin-top: 0;
+		opacity: 0;
+	}
+}
+
+h3{
+    font-size: 15px;
+}
+
+#myInput{
+	width: 700px;
+	margin-left: 40px;
+}
+
+.pod_name{
+	padding: 10px 0;
+	width: 600px;
+	float: left;
+}
+
