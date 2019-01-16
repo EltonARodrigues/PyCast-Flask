@@ -15,12 +15,11 @@ def index():
     feed.search_file()
 
     podcasts = feed.select()
-    if feed.number_of_podcasts() == -1:
-        return render_template('index.html', podcasts_list = podcasts_list, info=True)
 
     if request.method == 'POST':
         get_feed_url = request.form['url']
-
+        print(get_feed_url)
+        print('dddd')
         try:
             if not RSS(get_feed_url).add():
                 error_mensagem = 'Error to import'
@@ -33,6 +32,8 @@ def index():
         except AttributeError:
             error_mensagem = "Erro to import"
 
+    elif feed.number_of_podcasts() == -1:
+        return render_template('index.html', podcasts_list = podcasts_list, info=True)
 
     for i in range(0, len(podcasts)):
         podcasts_list.append(podcasts[i])
