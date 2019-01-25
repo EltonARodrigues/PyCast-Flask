@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WFPyCast</title>
+    <title>Podcasts PyCast</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/css/reset.css">
-
     <link rel="stylesheet" href="../static/css/main.css">
   </head>
   <body>
     <header>
       <div class=header_info>
-      <h1 class="heading">WFPyCast</h1>
+        <div class="heading">
+          <h1>FCast</h1>
+        </div>
+        {% if error %}
+        <div class="error-alert">{{ error }}</div>
+      {% endif %}
         <div class="formadd">
           <form action="/" method="POST">
             <fieldset>
@@ -23,9 +27,6 @@
         </div>
     </header>
     <main>
-        {% if error %}
-        <div class="error-alert">{{ error }}</div>
-      {% endif %}
       <section class="cards">
         {% if info %}
           <h1 class="info-alert">Empty!</h1>
@@ -34,14 +35,12 @@
         <article class="hover14">
             <a href="/{{ pod.0 }}/">
                 <figure>
-                  <img class="article-img" src="{{ pod.3 }}" alt=" " />
+                  <img class="article-img" src="{{ pod.2 }}" alt=" " />
                 </figure>
-                <a class="remove-button" href="{{ url_for('remove_feed', id=pod.0) }}">
+                <a class="remove-button" href="{{ url_for('remove', id=pod.0) }}">
                     <img class="remove-img" src="../static/img/remove.png" alt=" " />
                 </a>
-                <div class="div-title">
-                <h1 class="article-title">{{ pod.1 }}</h1>
-                </div>
+
             </a>
         </article>
         {% endfor %}

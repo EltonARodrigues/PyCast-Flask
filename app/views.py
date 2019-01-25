@@ -1,60 +1,53 @@
-from flask import flash, redirect, url_for, session, render_template, request
+from flask import redirect, url_for, session, render_template, request
 from flask import render_template
-from .pycast.feed import Feed
-from .pycast.rss import RSS
-
+from .helpers import RSS
+from .models import Feed
 from app import app
+from . import db
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     error_mensagem = ''
-    podcasts_list = list()
-
-    feed = Feed()
-    feed.search_file()
-
-    podcasts = feed.select()
+    info = False
 
     if request.method == 'POST':
-        get_feed_url = request.form['url']
-        print(get_feed_url)
-        print('dddd')
+        url_feed = request.form['url']
         try:
-            if not RSS(get_feed_url).add():
-                error_mensagem = 'Error to import'
+            verify_duplicate = Feed.query.filter_by(url=url_feed).scalar()
 
-            podcasts = feed.select()
-            for i in range(0, len(podcasts)):
-                podcasts_list.append(podcasts[i])
-            return render_template('index.html', podcasts_list = podcasts_list, error=error_mensagem)
+            if verify_duplicate == None:
+                name, cover = RSS(url_feed).add()
+                feed_row = Feed(name, cover, url_feed)
+                db.session.add(feed_row)
+                db.session.commit()
+            else:
+                error_mensagem = "Duplicate feed"
 
         except AttributeError:
             error_mensagem = "Erro to import"
 
-    elif feed.number_of_podcasts() == -1:
-        return render_template('index.html', podcasts_list = podcasts_list, info=True)
+    count_feeds = Feed.query.filter_by().count()
+    if count_feeds == 0:
+        info=True
 
-    for i in range(0, len(podcasts)):
-        podcasts_list.append(podcasts[i])
+    query = db.select([Feed.id,Feed.name,Feed.path_cover])
+    podcasts = db.session.execute(query).fetchall()
 
-    return render_template('index.html', podcasts_list = podcasts_list, error=error_mensagem)
+    return render_template('index.html',
+                            podcasts_list = podcasts,
+                            error=error_mensagem, info=info)
 
-@app.route('/remove/<id>/')
-def remove_feed(id):
-        feed = Feed()
+@app.route('/remove/<int:id>/')
+def remove(id):
+    Feed.query.filter_by(id=id).delete()
+    db.session.commit()
+    return redirect(url_for('index'))
 
-        feed.remove(id)
-        return redirect(url_for('index'))
 
-
-@app.route('/<id>/')
+@app.route('/<int:id>/')
 def episodes(id):
-    feed = Feed()
-
-    feed.search_file()
-
-    url_feed = feed.url(id)
-    rss = RSS(url_feed)
+    query = Feed.query.filter_by(id=id).first()
+    rss = RSS(query.url)
     episodes_name = rss.search_podcast()
-    return render_template('list.html', episodes_name=episodes_name)
+    return render_template('list_ep.html', episodes_name=episodes_name, cover=query.path_cover)

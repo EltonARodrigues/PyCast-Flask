@@ -1,0 +1,173 @@
+html, body{
+  height: 100%;
+  width: 100%;
+  
+}
+main{
+  background-color: #fff;
+}
+
+.list {
+    max-width: 1400px;
+    margin: 20px auto;
+  }
+  
+  .img-list a {
+    text-decoration: none;
+  }
+  
+  .li-sub p {
+    margin: 0;
+  }
+  
+  .list li {
+    border-bottom: 1px solid #ccc;
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .inner {
+    display: table-row;
+    overflow: hidden;
+  }
+  .li-img {
+    display: table-cell;
+    vertical-align: middle;
+    width: 30%;
+    padding-right: 1em;
+  }
+  .li-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+    
+  }
+  .li-text {
+    display: table-cell;
+    vertical-align: middle;
+    width: 70%;
+  }
+  .li-head {
+    margin: 10px 0 0 0;
+  }
+  .li-sub {
+    margin: 0;
+  }
+  
+  @media all and (min-width: 45em) {
+    .list li {
+      float: left;
+      width: 50%;
+    }
+  }
+  
+  @media all and (min-width: 75em) {
+    .list li {
+      width: 33.33333%;
+    }
+  }
+  
+  /* for flexbox */
+  @supports(display: flex) {
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .li-img,
+    .li-text,
+    .list li {
+      display: block;
+      float: none;
+    }
+  
+    .li-img {
+      align-self: center; /* to match the middle alignment of the original */
+    }
+    
+    .inner {
+      display: flex;
+    }
+  }
+  
+  /* for grid */
+  @supports(display: grid) {
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+    
+    .list li {
+      width: auto; /* this overrides the media queries */
+    }
+  }
+  
+.buttonDownload {
+	display: inline-block;
+	position: relative;
+	padding: 10px 25px;
+	background-color: #333;
+	color: white;
+	font-family: sans-serif;
+	text-decoration: none;
+	font-size: 0.9em;
+	text-align: center;
+	text-indent: 15px;
+  float: right;
+   margin: 20px;
+}
+
+.buttonDownload:hover {
+	background-color: #333;
+	color: white;
+}
+
+.buttonDownload:before, .buttonDownload:after {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 15px;
+	top: 52%;
+}
+
+.home-link{
+  color: #fff;
+  text-decoration: none;
+}
+
+.home-link:hover{
+  color: #273238;
+}
+
+/* Download box shape  */
+.buttonDownload:before {
+	width: 10px;
+	height: 2px;
+	border-style: solid;
+	border-width: 0 2px 2px;
+}
+
+/* Download arrow shape */
+.buttonDownload:after {
+	width: 0;
+	height: 0;
+	margin-left: 3px;
+	margin-top: -7px;
+
+	border-style: solid;
+	border-width: 4px 4px 0 4px;
+	border-color: transparent;
+	border-top-color: inherit;
+
+	animation: downloadArrow 2s linear infinite;
+	animation-play-state: paused;
+}
+
+.buttonDownload:hover:before {
+	border-color: #4CC713;
+}
+
+.buttonDownload:hover:after {
+	border-top-color: #4CC713;
+	animation-play-state: running;
+}

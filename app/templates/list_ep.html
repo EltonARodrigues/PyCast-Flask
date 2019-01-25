@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WFPyCast</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/main2.css">
+    <link rel="stylesheet" href="../static/css/list_ep.css">
+
+
+  </head>
+  <body>
+      <header>
+          <div class=header_info>
+            <div class="heading">
+              <h1>WFPyCast</h1>
+            </div>
+            <div class="formadd">
+                <a class="home-link" href="{{ url_for('index') }}">Home</a>
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search">
+              </div>
+            </div>
+        </header>
+    <main>
+
+
+  <ul id="myUL" class="list img-list">
+      {% for pod in episodes_name %}
+    <li>
+      <div class="inner">
+        <div class="li-img">
+          <img src="{{ cover }}" alt="Hot air balloons" />
+        </div>
+        <div class="li-text">
+          <h3 class="li-head">{{ pod.0 }}</h3>
+          <div class="li-sub">
+            <p>{{ pod.2 }}</p>
+            <a class="buttonDownload" href="{{ pod.1 }}">download</a>
+          </div>
+          </div>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+
+  </ul>
+    </main>
+    <script>
+
+        function myFunction() {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                h2 = li[i].getElementsByTagName("h3")[0];
+                txtValue = h2.textContent || h2.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }}
+
+        </script>
+  </body>
+</html>
