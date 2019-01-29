@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import app_config
 from flask import Flask
-
 db = SQLAlchemy()
 
 app = Flask(__name__, instance_relative_config=True)
