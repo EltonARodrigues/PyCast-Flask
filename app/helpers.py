@@ -31,10 +31,6 @@ class RSS:
     def __count_epsodios(self):
         return self.__file, int((len(self.__file['entries'])))
 
-    def __clear_link(self, mp3):
-        re_link = re.search('http.+mp3', mp3)
-        return re_link.group(0)
-
     def search_podcast(self):
         d, epsode_numbers = self.__count_epsodios()
         list_p = list()
