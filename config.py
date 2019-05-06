@@ -7,7 +7,7 @@ class Config(object):
     Common configurations
     """
     SECRET_KEY = os.urandom(24)
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:root@db/pycastdb'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:root@localhost/pycastdb'
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
